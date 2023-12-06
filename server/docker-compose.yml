@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mindsync_server:
+    env_file:
+      - .env
+    build:
+      context: .
+    container_name: mindsync_server
+    hostname: mindsync_server
+    restart: always
+    volumes:
+      - ./src:/app/
+    ports:
+      - ${PORT_SERVER}:8888
+    networks:
+      - mindsync-network
+
+networks:
+  mindsync-network:
+    name: mindsync-network
+    driver: bridge
